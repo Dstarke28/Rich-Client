@@ -27,13 +27,132 @@ class: center, middle
 
 # Agenda
 
-1. Introduction
-2. Deep-dive
-3. ...
+1. Variablen Deklaration
+2. Konstanten Deklaration
+3. Arrow Funktionen
+4. Implicit returns
+5. Template Literale
+6. Wert-Schlüssel Shorthand
+7. Methodendefinitions Shorthand
 
 ---
+# Variablen Deklaration
+* mit *let* lassen sich Variablen mit einem Block Reichweite umsetzten
+    * nicht neu deklarierbar 
+        * **BSP** int bleibt int
+		
+**ES 6**
+```javascript
+let x = 0;
+```
+**vorher**
+```javascript 
+var x = 0;
+```
 
-# Introduction
+# Konstanten Deklaration
+
+* Seit ES6 gibt es das Konstanten
+    * nicht neu deklarierbar
+    * nicht neu zuweisbar
+
+    ```javascript
+const CONST_IDENTIFIER = 0// Konstanten sind per Konvention großgeschrieben
+```
+---
+     
+# Arrow Funktionen
+
+* Mit dem Arrow Function Syntax lassen sich Funktionen schneller erstellen
+    * man kann das deklarieren überspringen
+	
+**ES 6**
+```javascript 
+let func = a => {}         // parentheses optional with one parameter
+let func = (a, b, c) => {} // parentheses required with multiple parameters
+```
+**vorher**
+```javascript 
+function func(a, b, c) {}        // function declaration
+var func = function(a, b, c) {}  // function expression
+```
+---
+# Implicit returns
+* *return* kann durch arrows ersetzt werden
+    * spart den Block Body
+**ES 6**
+```javascript 
+let func = (a, b, c) => a + b + c; // geschweifte Klammern müssen 
+                                           // ausgelassen werden
+```
+**vorher**
+```javascript 
+function func(a, b, c) { return a + b + c; } 
+```
+---
+# Template Literale
+
+* Ausdrücke lassen sich Template Literale Strings einfach anhängen
+
+    **ES 6**
+```javascript 
+let str = `Release Date: ${date}`;
+```
+    **vorher**
+```javascript 
+var str = 'Release date: ' + date;
+```
+
+* Mit Template Literalen lassen sich mehrzeilige Strings einfach erfassen
+
+    **ES 6**
+```javascript 
+let str = `This text
+           is on
+           multiple lines`;
+```
+    **vorher**
+```javascript 
+var str = 'This text ' +
+          'is on ' +
+          'multiple lines';
+```
+---
+# Wert-Schlüssel Shorthand
+* Variablen mit dem selben Namen wie Werte lassen sich schneller zuweisen
+
+    **ES 6**
+```javascript 
+let obj = {  
+    a, 
+    b
+}
+```
+    **vorher**
+```javascript 
+var obj = { 
+    a: a, 
+    b: b
+}
+```
+---
+# Methodendefinitions Shorthand
+* beim zuweisen einer Methode zu einem Objekt kann man das *function* weglassen
+
+    **ES 6**
+```javascript
+var obj = {
+    a: function(c, d) {},
+    b: function(e, f) {}
+};
+``` 
+    **vorher**
+```javascript 
+let obj = {
+    a(c, d) {},
+    b(e, f) {}
+}
+```
 
     </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js">
