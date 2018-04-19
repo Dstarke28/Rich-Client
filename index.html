@@ -35,6 +35,10 @@ class: center, middle
 6. Wert-Schlüssel Shorthand
 7. Methodendefinitions Shorthand
 8. Module
+9. 
+10.
+11.
+12.
 
 ---
 # Variablen Deklaration
@@ -162,23 +166,224 @@ let obj = {
 <script src="export.js"></script>
 <script type="module" src="import.js"></script>
 ```
-    * exportieren <br/>
-	**export.js**
+* exportieren <br/>
+**export.js**
 	
-    ```javascript
-    let func = a => a + a;
-    let obj = {};
-    let x = 0;
+```javascript
+let func = a => a + a;
+let obj = {};
+let x = 0;
 
-    export { func, obj, x };
-    ```
-    * importieren <br/>
-	**import.js**
+export { func, obj, x };
+```
+* importieren <br/>
+**import.js**
     
-	```javascript
-	import { func, obj, x } from './export.js';
-    console.log(func(3), obj, x);
-    ```
+```javascript
+import { func, obj, x } from './export.js';
+console.log(func(3), obj, x);
+```
+---
+
+# Classes/constructor functions 1
+
+
+ES6 führt die Klassen Syntaxs über der prototype-basierten Konstruktor Funktion ein.
+
+*_ES5_*
+```javascript
+function Func(a, b) {
+    this.a = a;
+    this.b = b;
+}
+
+Func.prototype.getSum = function() {
+    return this.a + this.b;
+}
+
+var x = new Func(3, 4);
+```
+
+---
+
+# Classes/constructor functions 2
+
+
+*_ES6_*
+```javascript
+class Func {
+    constructor(a, b) {
+        this.a = a;
+        this.b = b;
+    }
+
+    getSum() {
+        return this.a + this.b;
+    }
+}
+
+let x = new Func(3, 4);
+```
+
+```javascript
+x.getSum(); // returns 7
+```
+
+---
+
+# Inheritance 1
+
+
+Das **extends** Schlüsselwort erstellt eine Subklasse.
+
+*_ES5_*
+```javascript
+function Inheritance(a, b, c) {
+    Func.call(this, a, b);
+
+    this.c = c;
+}
+
+Inheritance.prototype = Object.create(Func.prototype);
+Inheritance.prototype.getProduct = function() {
+    return this.a * this.b * this.c;
+}
+
+var y = new Inheritance(3, 4, 5);
+```
+
+---
+
+# Inheritance 2
+
+
+*_ES6_*
+````javascript
+class Inheritance extends Func {
+    constructor(a, b, c) {
+        super(a, b);
+
+        this.c = c;
+    }
+
+    getProduct() {
+        return this.a * this.b * this.c;
+    }
+}
+
+let y = new Inheritance(3, 4, 5);
+```
+
+```javascript
+y.getProduct(); // 60
+```
+
+---
+
+# Promises/Callbacks 1
+
+
+Promises representieren die komplettierung von einer asyncronen Funktion. Sie kann als alternative zu Ketten Funktionen benutzt werden.
+
+
+*_ES5 callback_*
+```javascript
+function doSecond() {
+    console.log('Do second.');
+}
+
+function doFirst(callback) {
+    setTimeout(function() {
+        console.log('Do first.');
+
+        callback();
+    }, 500);
+}
+
+doFirst(doSecond);
+```
+
+---
+
+# Promises/Callbacks 2
+
+
+*_ES6 Promise_*
+```javascript
+let doSecond = () => {
+    console.log('Do second.');
+}
+
+let doFirst = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        console.log('Do first.');
+
+        resolve();
+    }, 500);
+});
+
+doFirst.then(doSecond);
+```
+
+---
+
+# Promises/Callbacks 3
+
+
+Ein Beispiel unten zeigt für demonstrative Zwecke wie man eine moderne API Fetcht. 
+
+*_ES5 callback_*
+```javascript
+function makeRequest(method, url, callback) {
+    var request = new XMLHttpRequest();
+
+    request.open(method, url);
+    request.onload = function() {
+        callback(null, request.response);
+    };
+    request.onerror = function() {
+        callback(request.response);
+    };
+    request.send();
+}
+
+makeRequest('GET', 'https://url.json', function (err, data) {
+        if (err) { 
+            throw new Error(err);
+        } else {
+            console.log(data);
+        }
+    }
+);
+```
+
+---
+
+# Promises/Callbacks 4
+
+
+*_ES6 Promise_*
+```javascript
+function makeRequest(method, url) {
+    return new Promise((resolve, reject) => {
+        let request = new XMLHttpRequest();
+
+        request.open(method, url);
+        request.onload = resolve;
+        request.onerror = reject;
+        request.send();
+    });
+}
+
+makeRequest('GET', 'https://url.json')
+.then(event => {
+    console.log(event.target.response);
+})
+.catch(err => {
+    throw new Error(err);
+});
+```
+	
     </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js">
     </script>
