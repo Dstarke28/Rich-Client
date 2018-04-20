@@ -35,10 +35,13 @@ class: center, middle
 6. Wert-Schlüssel Shorthand
 7. Methodendefinitions Shorthand
 8. Module
-9. 
-10.
-11.
-12.
+9. Classes/constructor functions
+10. Inheritance
+11. Promises/Callbacks
+12. Destrukturierende Zuweisung
+13. Array Iteration
+14. Default Parameter
+15. Spread Syntax
 
 ---
 # Variablen Deklaration
@@ -383,7 +386,85 @@ makeRequest('GET', 'https://url.json')
     throw new Error(err);
 });
 ```
-	
+
+---
+
+# Destrukturierende Zuweisung
+* Geschweifte Klammern, um den Variablen eines Objekts Werte zuzuweisen
+```javascript
+var obj = { a: 1, b: 2, c: 3 };
+```
+**ES 6**
+```javascript
+let {a, b, c} = obj;
+```
+**vorher**
+```javascript
+var a = obj.a;
+var b = obj.b;
+var c = obj.c;
+```
+
+---
+
+# Array Iteration
+* kürzere Syntax zur Iteration von Arrays und anderen iterierbaren Strukturen
+```javascript
+var arr = ['a', 'b', 'c'];
+```
+**ES 6**
+```javascript
+for (let i of arr) {
+console.log(i);
+}
+```
+**vorher**
+```javascript
+for (var i = 0; i < arr.length; i++) {
+console.log(arr[i]);
+}
+```
+
+---
+
+# Default Parameter
+* Funktionen können mit Default Parametern initialisiert werden
+    * genutzt, falls Argument nicht übergeben wird
+
+	**ES 6**
+```javascript
+let func = (a, b = 2) => {
+return a + b;
+}
+```
+**vorher**
+```javascript
+var func = function(a, b) {
+b = (b === undefined) ? 2 : b;
+return a + b;
+}
+```
+```javascript
+func(10);   // returns 12
+func(10, 5) // returns 15
+```
+
+---
+
+# Spread Syntax
+* Erweitern eines Arrays
+```javascript
+let arr1 = [1, 2, 3];
+let arr2 = ['a', 'b', 'c'];
+let arr3 = [...arr1, ...arr2];
+console.log(arr3); // [1, 2, 3, "a", "b", "c"]
+```
+* Nutzung als Funktionsargumente
+```javascript
+let arr1 = [1, 2, 3];
+let func = (a, b, c) => a + b + c;
+console.log(func(...arr1)); // 6
+```
     </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js">
     </script>
