@@ -168,18 +168,15 @@ let obj = {
 * Komponenten lassen sich definieren und auslagern
 * Laufzeitverhalten wird durch die *Module Loader* definiert
 * Module können genutzt werden um code zwischen Dateien zu transportieren
-    
-	**index.html**
 ```javascript 
 <script src="export.js"></script>
 <script type="module" src="import.js"></script>
-```
-* exportieren
+```  
+* exportieren  
 ```javascript
 let func = a => a + a;
 let obj = {};
 let x = 0;
-
 export { func, obj, x };
 ```
 * importieren
@@ -205,19 +202,17 @@ loader.eval("console.log('hello world!');");
 ```
 ---
 # Maps
-* einfache Struktur für Algorithmen
 ```javascript
 // Maps
 var m = new Map();
 m.set("hello", 42);
 m.set(s, 34);
 m.get(s) == 34;
-
 // Weak Maps
 var wm = new WeakMap();
 wm.set(s, { extra: 42 });
 wm.size === undefined
-```
+```  
 # Sets
 ```javascript
 // Sets
@@ -225,11 +220,11 @@ var s = new Set();
 s.add("hello").add("goodbye").add("hello");
 s.size === 2;
 s.has("hello") === true;
-
 // Weak Sets
 var ws = new WeakSet();
 ws.add({ data: 42 });
-// Because the added object has no other references, it will not be held in the set
+// Because the added object has no other references,
+// it will not be held in the set
 ```
 ---
 # Classes/constructor functions 1
