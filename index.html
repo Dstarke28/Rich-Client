@@ -35,13 +35,16 @@ class: center, middle
 6. Wert-Schlüssel Shorthand
 7. Methodendefinitions Shorthand
 8. Module
-9. Classes/constructor functions
-10. Inheritance
-11. Promises/Callbacks
-12. Destrukturierende Zuweisung
-13. Array Iteration
-14. Default Parameter
-15. Spread Syntax
+9. Module Loader
+10. Maps
+11. Sets
+12. Classes/constructor functions
+13. Inheritance
+14. Promises/Callbacks
+15. Destrukturierende Zuweisung
+16. Array Iteration
+17. Default Parameter
+18. Spread Syntax
 
 ---
 # Variablen Deklaration
@@ -171,9 +174,7 @@ let obj = {
 <script src="export.js"></script>
 <script type="module" src="import.js"></script>
 ```
-* exportieren <br/>
-**export.js**
-	
+* exportieren
 ```javascript
 let func = a => a + a;
 let obj = {};
@@ -181,9 +182,7 @@ let x = 0;
 
 export { func, obj, x };
 ```
-* importieren <br/>
-**import.js**
-    
+* importieren
 ```javascript
 import { func, obj, x } from './export.js';
 console.log(func(3), obj, x);
