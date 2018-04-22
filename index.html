@@ -21,7 +21,7 @@
 
 class: center, middle
 
-# Title
+# ES6 Features
 
 ---
 
@@ -45,6 +45,10 @@ class: center, middle
 16. Array Iteration
 17. Default Parameter
 18. Spread Syntax
+19. Iteratoren
+20. For of und Iteratoren
+21. Generatoren und Iteratoren
+22. Unicode
 
 ---
 # Variablen Deklaration
@@ -504,6 +508,94 @@ let arr1 = [1, 2, 3];
 let func = (a, b, c) => a + b + c;
 console.log(func(...arr1)); // 6
 ```
+
+---
+
+# Iteratoren
+* Interfaces zum Typ Iterator
+```javascript
+interface IteratorResult {
+      done: boolean;
+      value: any;
+}
+interface Iterator {
+      next(): IteratorResult;
+}
+interface Iterable {
+      [Symbol.iterator](): Iterator
+}
+```
+* Beispiel Iterator
+```javascript
+let fibonacci = {
+      [Symbol.iterator]() {
+            let pre = 0, cur = 1;
+            return {
+                  next() {
+                          [pre, cur] = [cur, pre + cur];
+                          return { done: false, value: cur }
+      }
+    }
+  }
+}
+```
+
+---
+
+# For of und Iteratoren
+* Ausgabe der Fibonaccizahlen mit Hilfe von for of
+```javascript
+for (var n of fibonacci) {
+      // truncate the sequence at 1000
+      if (n > 1000)
+          break;
+      console.log(n);
+}
+```
+
+---
+
+# Generatoren und Iteratoren
+* Fibonaccizahlen mit einem Generator
+```javascript
+var fibonacci = {
+      [Symbol.iterator]: function*() {
+            var pre = 0, cur = 1;
+            for (;;) {
+                  var temp = pre;
+                  pre = cur;
+                  cur += temp;
+                  yield cur;
+            }      
+     }
+}
+```
+** yield gibt Zahlen zurück, diese warten bis sie mit einem next()-Aufruf abgerufen werden.
+
+---
+
+# Unicode
+* ES6 unterstützt Unicode in vollem Umfang
+
+```javascript
+// same as ES5.1
+"𠮷".length == 2
+
+// new RegExp behaviour, opt-in ‘u’
+"𠮷".match(/./u)[0].length == 2
+
+// new form
+"\u{20BB7}"=="𠮷"=="\uD842\uDFB7"
+
+// new String ops
+"𠮷".codePointAt(0) == 0x20BB7
+
+// for-of iterates code points
+for(var c of "𠮷") {
+  console.log(c);
+}
+```
+
     </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js">
     </script>
