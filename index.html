@@ -49,6 +49,9 @@ class: center, middle
 20. For of und Iteratoren
 21. Generatoren und Iteratoren
 22. Unicode
+23. Proxies
+24. Symbole
+
 
 ---
 # Variablen Deklaration
@@ -595,6 +598,56 @@ for(var c of "𠮷") {
   console.log(c);
 }
 ```
+---
+# Proxies
+* ermöglichen erstellung eines Objektes das den selben Umfang an Funktionen und Verhalten, wie das Ursprungs Objekt hat
+    * für Interception
+    * für Objekt Virtualisierung
+    * für Logging/ Profiling und vieles mehr
+```javascript
+//  Proxy eines normalen Objektes
+var target = {};
+var handler = {
+  get: function (receiver, name) {
+    return `Hello, ${name}!`;
+  }
+};
+var p = new Proxy(target, handler);
+p.world === 'Hello, world!';
+```
+```javascript
+// Proxy eines funktion Objektes
+var target = function () { return 'I am the target'; };
+var handler = {
+  apply: function (receiver, ...args) {
+    return 'I am the proxy';
+  }
+};
+var p = new Proxy(target, handler);
+p() === 'I am the proxy';
+```
+---
+# Symbole
+* Symbole ermöglichen Zugriff auf Objekt Zustände
+```javascript
+var MyClass = (function() {
+  // Modul weites Symbol
+  var key = Symbol("key");
+  function MyClass(privateData) {
+    this[key] = privateData;
+  }
+  MyClass.prototype = {
+    doStuff: function() {
+      ... this[key] ...
+    }
+  };
+  return MyClass;
+})();
+var c = new MyClass("hello")
+c["key"] === undefined
+```
+---
+
 
     </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js">
